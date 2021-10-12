@@ -24,9 +24,24 @@
 /*
  * MACROS
  */
+
+/*
+ * @brief: Each of the number represented below
+ * 			represents the time elapsed in 1/20 of second.
+ *
+ * 			If you multiply each number by 50, we will get
+ * 			time in milliseconds.
+ *
+ * 		100*50 	= 5000 mSec
+ * 		60*50	= 3000 mSec
+ * 		400*50	= 20000 mSec
+ * 		200*50	= 10000 mSec
+ * 		15*50 	= 750 mSec
+ * 		5*50	= 250 mSec
+ */
 #if DEBUG
-#define TWENTY_SECONDS 				100
-#define FIVE_SECONDS				60
+#define TWENTY_SECONDS 				100			//in debug mode, STOP and GO state should be 5 seconds long
+#define FIVE_SECONDS				60			//in debug mode, WARNING state should be 3 seconds long
 
 #else
 #define TWENTY_SECONDS 				400
@@ -37,6 +52,7 @@
 #define ONE_SECOND					20
 #define SEVEN_FIFTY_MILLISECONDS	15
 #define TWO_FIFTY_MILLISECONDS		5
+
 /*
  * @brief: 					An enumeration of all the possible states with
  * 							various numeric values assigned to each state.
