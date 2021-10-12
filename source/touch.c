@@ -24,7 +24,6 @@ void Touch_Init()
 
 uint32_t Touch_Scan_LH(void)
 {
-	//printf("%u\n", now());
 	uint32_t scan = 0;
 	TSI0->DATA = 	TSI_DATA_TSICH(10u);
 	TSI0->DATA |= TSI_DATA_SWTS_MASK; //software trigger to start the scan

@@ -33,4 +33,22 @@ In Tera Term, after selecting the COM port,
 Go to Setup->Serial Port-> Baud rate = 115200.
 Then, go to Setup->Terminal->Newline->Receive->LF
 
+Extra Credit #1
+Peer Review: 
+Partner: Amey Dashaputre
 
+Peer Review Date: 12 October 2021
+Peer Review Time: 4.30 AM
+
+Comments by reviewer:
+1. Remove all the commented code lines.
+2. Add comment in SYSTICK-> VAL
+3. Add comments in pwm init functions.
+4. Add comments in switch init
+
+Edits: 
+Added comments to the sections suggested by reviewer.
+
+
+-------------
+Final Code is tagged with tag "final-code-for-review"

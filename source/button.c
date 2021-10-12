@@ -24,8 +24,11 @@ volatile int button_press = 0;
 
 void switch_init()
 {
+	//initialize clock to the port D
 	SIM->SCGC5 |= SIM_SCGC5_PORTD_MASK;
+	//clear port D pin 3
 	PORTD->PCR[GPIO_PIN] &= ~PORT_PCR_MUX_MASK;
+	//set port pin as GPIO
 	PORTD->PCR[GPIO_PIN] |= PORT_PCR_MUX(1);
 	GPIOD->PDDR |= ~(1 << GPIO_PIN);
 	PORTD->PCR[GPIO_PIN]|=PORT_PCR_PS(1)|PORT_PCR_PE(1UL);
@@ -37,7 +40,10 @@ void switch_init()
 
 void PORTD_IRQHandler()
 {
+	//disable irq
     NVIC_DisableIRQ(PORTD_IRQn);
+
+    //set flag to 1
 	button_press = 1;
 	PORTD->ISFR&=(1<<GPIO_PIN);
 }
@@ -45,6 +51,8 @@ void PORTD_IRQHandler()
 
 int switch_pressed()
 {
+	//this funciton is called every 100mSec during polling
+	//to avoid the pending interrupts, we disable the irq
   NVIC_DisableIRQ(PORTD_IRQn);
   int switch_value = button_press;
 

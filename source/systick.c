@@ -24,9 +24,9 @@ uint32_t timer_interrupt_count=0, systick_count=0;
 
 void Init_SysTick()
 {
-	SysTick->LOAD = FIFTY_MILLISECONDS;
-	NVIC_SetPriority (SysTick_IRQn, 3);
-	SysTick->VAL = 0;
+	SysTick->LOAD = FIFTY_MILLISECONDS;  	//initialize systick with top value corresponding to 50mSec
+	NVIC_SetPriority (SysTick_IRQn, 3);		//set interrupt priority to 3
+	SysTick->VAL = 0;						//force the systick counter to reload
 	SysTick->CTRL = SysTick_CTRL_TICKINT_Msk | SysTick_CTRL_ENABLE_Msk;
 }
 
