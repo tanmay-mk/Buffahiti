@@ -1,0 +1,7 @@
+core_cm0plus.h:804:22:NVIC_SetPriority	24	static
+systick.c:25:6:Init_SysTick	8	static
+systick.c:33:6:SysTick_Handler	8	static
+systick.c:39:12:now	8	static
+systick.c:44:12:get_timer	8	static
+systick.c:49:6:reset_timer	8	static
+systick.c:55:6:reset_count	8	static

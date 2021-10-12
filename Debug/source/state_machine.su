@@ -1,0 +1,2 @@
+state_machine.c:48:6:state_machine	64	static
+state_machine.c:660:6:transition	40	static
