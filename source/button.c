@@ -6,6 +6,8 @@
 /*
  * LIBRARY FILES TO BE INCLUDED
  */
+#include "LOG.h"
+#include "fsl_debug_console.h"
 #include "MKL25Z4.h"
 
 /*
@@ -35,6 +37,7 @@ void switch_init()
 
 void PORTD_IRQHandler()
 {
+    NVIC_DisableIRQ(PORTD_IRQn);
 	button_press = 1;
 	PORTD->ISFR&=(1<<GPIO_PIN);
 }
@@ -42,8 +45,9 @@ void PORTD_IRQHandler()
 
 int switch_pressed()
 {
-  int switch_value = button_press;
   NVIC_DisableIRQ(PORTD_IRQn);
+  int switch_value = button_press;
+
   button_press = 0;
 
   NVIC_EnableIRQ(PORTD_IRQn);
