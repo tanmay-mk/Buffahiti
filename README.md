@@ -1,5 +1,22 @@
 # PES-Assignment-4
 
+Files created: 
+button.h
+button.c
+led_on.h
+led_on.c
+log.h
+pwm.h
+pwm.c
+state_machine.h
+state_machine.c
+systick.h
+systick.c
+touch.h
+touch.c
+
+SysTick interrupt is generated every 50 milliseconds.
+
 For Extra Credit #2, 
 Port D Pin 3 is used as a switch. 
 
@@ -11,5 +28,9 @@ For DEBUG mode, LOG calls are included in every state transition.
 
 Touch Sensor and GPIO Switch interrupt are being polled every 100 milliseconds.
 
+UART and LOG messages are displayed using TERA TERM. 
+In Tera Term, after selecting the COM port, 
+Go to Setup->Serial Port-> Baud rate = 115200.
+Then, go to Setup->Terminal->Newline->Receive->LF
 
 

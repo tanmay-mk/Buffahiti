@@ -32,6 +32,10 @@
  *
  * 	switch_value		: A variable that is either 1 or 0 depending on the
  * 						presence of GPIO interrupt.
+ *
+ * 	variable_for_ON		: A variable used in blinking the LED in crosswalk state
+ *
+ * 	variable_for_OFF	: A variable used in blinking the LED in crosswalk state
  */
 
 volatile uint32_t touch_value=0;
@@ -209,7 +213,7 @@ void state_machine()
 						reset_count();
 						touch_poll_variable = 1;
 						#if DEBUG
-							LOG("%d mSec\t\t:Changning State to TRANSITION_STOP_TO_CROSSWALK.\n", now()*50-50);
+							LOG("%d mSec\t\t:Changning State from STOP_STATE to TRANSITION_STOP_TO_CROSSWALK.\n", now()*50-50);
 						#endif
 						//resetting the GPIO interrupt variable
 						switch_value=0;
@@ -226,7 +230,7 @@ void state_machine()
 				//resetting the counter
 				reset_count();
 				#if DEBUG
-					LOG("%d mSec\t\t:Changning State to TRANSITION_STOP_TO_GO.\n", now()*50-50);
+					LOG("%d mSec\t\t:Changning State from STOP_STATE to TRANSITION_STOP_TO_GO.\n", now()*50-50);
 				#endif
 				nextState = TRANSITION_STOP_TO_GO;
 			}
@@ -259,7 +263,7 @@ void state_machine()
 						//resetting the counter
 						reset_count();
 						#if DEBUG
-							LOG("%d mSec\t\t:Changning State to TRANSITION_TO_CROSSWALK.\n", now()*50-50);
+							LOG("%d mSec\t\t:Changning State from TRANSITION_STOP_TO_GO to TRANSITION_TO_CROSSWALK.\n", now()*50-50);
 						#endif
 						nextState = TRANSITION_TO_CROSSWALK;
 						switch_value=0;
@@ -276,7 +280,7 @@ void state_machine()
 				touch_poll_variable = 1;
 				reset_count();
 				#if DEBUG
-					LOG("%d mSec\t\t:Changning State to GO_STATE.\n", now()*50-50);
+					LOG("%d mSec\t\t:Changning State from TRANSITION_STOP_TO_GO to GO_STATE.\n", now()*50-50);
 				#endif
 				nextState = GO_STATE;
 			}
@@ -310,7 +314,7 @@ void state_machine()
 						reset_count();
 						touch_poll_variable = 1;
 						#if DEBUG
-							LOG("%d mSec\t\t:Changning State to TRANSITION_GO_TO_CROSSWALK.\n", now()*50-50);
+							LOG("%d mSec\t\t:Changning State from GO_STATE to TRANSITION_GO_TO_CROSSWALK.\n", now()*50-50);
 						#endif
 						switch_value=0;
 						nextState = TRANSITION_GO_TO_CROSSWALK;
@@ -325,7 +329,7 @@ void state_machine()
 			{
 				reset_count();
 				#if DEBUG
-					LOG("%d mSec\t\t:Changning State to TRANSITION_GO_TO_WARNING.\n", now()*50-50);
+					LOG("%d mSec\t\t:Changning State from GO_STATE to TRANSITION_GO_TO_WARNING.\n", now()*50-50);
 				#endif
 				nextState = TRANSITION_GO_TO_WARNING;
 			}
@@ -357,7 +361,7 @@ void state_machine()
 						#endif
 						reset_count();
 						#if DEBUG
-							LOG("%d mSec\t\t:Changning State to TRANSITION_TO_CROSSWALK.\n", now()*50-50);
+							LOG("%d mSec\t\t:Changning State from TRANSITION_GO_TO_WARNING to TRANSITION_TO_CROSSWALK.\n", now()*50-50);
 						#endif
 						nextState = TRANSITION_TO_CROSSWALK;
 						switch_value=0;
@@ -374,7 +378,7 @@ void state_machine()
 				touch_poll_variable = 1;
 				reset_count();
 				#if DEBUG
-					LOG("%d mSec\t\t:Changning State to WARNING_STATE.\n", now()*50-50);
+					LOG("%d mSec\t\t:Changning State from TRANSITION_GO_TO_WARNING to WARNING_STATE.\n", now()*50-50);
 				#endif
 				nextState = WARNING_STATE;
 			}
@@ -407,7 +411,7 @@ void state_machine()
 						#endif
 						reset_count();
 						#if DEBUG
-							LOG("%d mSec\t\t:Changning State to TRANSITION_WARNING_TO_CROSSWALK.\n", now()*50-50);
+							LOG("%d mSec\t\t:Changning State from WARNING_STATE to TRANSITION_WARNING_TO_CROSSWALK.\n", now()*50-50);
 						#endif
 						nextState = TRANSITION_WARNING_TO_CROSSWALK;
 						switch_value=0;
@@ -424,7 +428,7 @@ void state_machine()
 				touch_poll_variable = 1;
 				reset_count();
 				#if DEBUG
-					LOG("%d mSec\t\t:Changning State to TRANSITION_WARNING_TO_STOP.\n", now()*50-50);
+					LOG("%d mSec\t\t:Changning State from WARNING_STATE to TRANSITION_WARNING_TO_STOP.\n", now()*50-50);
 				#endif
 				nextState = TRANSITION_WARNING_TO_STOP;
 			}
@@ -456,7 +460,7 @@ void state_machine()
 						#endif
 						reset_count();
 						#if DEBUG
-							LOG("%d mSec\t\t:Changning State to TRANSITION_TO_CROSSWALK.\n", now()*50-50);
+							LOG("%d mSec\t\t:Changning State from TRANSITION_WARNING_TO_STOP to TRANSITION_TO_CROSSWALK.\n", now()*50-50);
 						#endif
 						nextState = TRANSITION_TO_CROSSWALK;
 						switch_value=0;
@@ -473,7 +477,7 @@ void state_machine()
 				touch_poll_variable = 1;
 				reset_count();
 				#if DEBUG
-					LOG("%d mSec\t\t:Changning State to STOP_STATE.\n", now()*50-50);
+					LOG("%d mSec\t\t:Changning State from TRANSITION_WARNING_TO_STOP to STOP_STATE.\n", now()*50-50);
 				#endif
 				nextState = STOP_STATE;
 			}
@@ -507,7 +511,7 @@ void state_machine()
 				variable_for_OFF = 0;
 				reset_count();
 				#if DEBUG
-					LOG("%d mSec\t\t:Changning State to TRANSITION_CROSSWALK_TO_GO.\n", now()*50);
+					LOG("%d mSec\t\t:Changning State from CROSSWALK_STATE to TRANSITION_CROSSWALK_TO_GO.\n", now()*50);
 				#endif
 				nextState = TRANSITION_CROSSWALK_TO_GO;
 				break;
@@ -530,7 +534,7 @@ void state_machine()
 			{
 				reset_count();
 				#if DEBUG
-					LOG("%d mSec\t\t:Changning State to CROSSWALK_STATE.\n", now()*50-50);
+					LOG("%d mSec\t\t:Changning State from TRANSITION_STOP_TO_CROSSWALK to CROSSWALK_STATE.\n", now()*50-50);
 				#endif
 				nextState = CROSSWALK_STATE;
 			}
@@ -551,7 +555,7 @@ void state_machine()
 			{
 				reset_count();
 				#if DEBUG
-					LOG("%d mSec\t\t:Changning State to CROSSWALK_STATE.\n", now()*50-50);
+					LOG("%d mSec\t\t:Changning State from TRANSITION_GO_TO_CROSSWALK to CROSSWALK_STATE.\n", now()*50-50);
 				#endif
 				nextState = CROSSWALK_STATE;
 			}
@@ -572,7 +576,7 @@ void state_machine()
 			{
 				reset_count();
 				#if DEBUG
-					LOG("%d mSec\t\t:Changning State to CROSSWALK_STATE.\n", now()*50-50);
+					LOG("%d mSec\t\t:Changning State from TRANSITION_WARNING_TO_CROSSWALK to CROSSWALK_STATE.\n", now()*50-50);
 				#endif
 				nextState = CROSSWALK_STATE;
 			}
@@ -606,7 +610,7 @@ void state_machine()
 						reset_count();
 						touch_poll_variable = 1;
 						#if DEBUG
-							LOG("%d mSec\t\t:Changning State to TRANSITION_TO_CROSSWALK.\n", now()*50-50);
+							LOG("%d mSec\t\t:Changning State from TRANSITION_CROSSWALK_TO_GO to TRANSITION_TO_CROSSWALK.\n", now()*50-50);
 						#endif
 						nextState = TRANSITION_TO_CROSSWALK;
 						switch_value=0;
@@ -622,7 +626,7 @@ void state_machine()
 				reset_count();
 				touch_poll_variable = 1;
 				#if DEBUG
-					LOG("%d mSec\t\t:Changning State to GO_STATE.\n", now()*50-50);
+					LOG("%d mSec\t\t:Changning State from TRANSITION_CROSSWALK_TO_GO to GO_STATE.\n", now()*50-50);
 				#endif
 				nextState = GO_STATE;
 			}
@@ -643,7 +647,7 @@ void state_machine()
 			{
 				reset_count();
 				#if DEBUG
-					LOG("%d mSec\t\t:Changning State to CROSSWALK_STATE.\n", now()*50-50);
+					LOG("%d mSec\t\t:Changning State from TRANSITION_TO_CROSSWALK to CROSSWALK_STATE.\n", now()*50-50);
 				#endif
 				nextState = CROSSWALK_STATE;
 			}
